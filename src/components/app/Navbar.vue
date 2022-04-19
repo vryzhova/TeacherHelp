@@ -2,7 +2,7 @@
     <nav class="navbar blue darken-4  ">
         <div class="nav-wrapper">
         <div class="navbar-left">
-            <a href="#">
+            <a href="#" @click.prevent="$emit('click')">
                 <i class="material-icons white-text">dehaze</i>
             </a>
             <span class="white-text">12.12.12</span>

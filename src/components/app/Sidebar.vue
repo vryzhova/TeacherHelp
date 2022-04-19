@@ -1,38 +1,25 @@
 <template>
-    <ul class="sidenav  app-sidenav open">
-        <img src="@/assets/avatar.jpg" class="circle avatar center">
-        <div class="userName center ">
-        Лисицына Любовь Сергеевна
-        </div>
-        <li>
-            <a href="#" class="waves-effect waves-red pointer">Дисциплины</a>
-        </li>
-        <li>
-            <a href="#" class="waves-effect waves-red pointer">Каталоги</a>
-        </li>
-        <!-- <li>
-            <a href="#" class="waves-effect waves-red pointer">Планирование</a>
-        </li>
-        <li>
-            <a href="#" class="waves-effect waves-red pointer">Новая запись</a>
-        </li>
-        <li>
-            <a href="#" class="waves-effect waves-red pointer">Категории</a>
-        </li> -->
+    <ul class="sidenav  app-sidenav" :class="{open: value}">
+        <router-link
+        v-for="link in links"
+        :key="link.url"
+        tag="li"
+        active-class="active" :to="link.url"
+        :exact="link.exact"
+        >
+            <a href="#" class="waves-effect waves-red pointer">{{link.title}}</a>
+        </router-link>
     </ul>
 </template>
 
-<style>
-.userName {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-style: bold;
+<script>
+export default {
+    props: ['value'],
+    data: () => ({
+        links: [
+            {title: 'Дисциплины', url: '/', exact: true},
+            {title: 'Каталоги', url: '/catalogs'}
+        ]
+    })
 }
-.avatar {
-    width: 100px;
-    height: 100px;
-    padding: 10px;
-    text-align: center;
-    object-fit: cover;
-}
-</style>
+</script>

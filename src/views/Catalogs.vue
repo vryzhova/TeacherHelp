@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Категории</h3>
+      <h3>Каталоги</h3>
     </div>
-    <section>
+    <!-- <section>
       <div class="row">
         <div class="col s12 m6">
           <div>
@@ -74,6 +74,6 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
   </div>
 </template>
