@@ -37,5 +37,12 @@ export default new Router({
       meta: {layout: 'main'},
       component: () => import('./views/Profile.vue')
     }
+    ,
+    {
+      path: '/admin/teachers',
+      name: 'addTeacher',
+      meta: {layout: 'main'},
+      component: () => import('./views/AddTeacher.vue')
+    }
   ]
 })

@@ -18,7 +18,8 @@ export default {
     data: () => ({
         links: [
             {title: 'Дисциплины', url: '/', exact: true},
-            {title: 'Каталоги', url: '/catalogs'}
+            {title: 'Каталоги', url: '/catalogs'},
+            {title: 'Преподаватели', url: '/admin/teachers'}
         ]
     })
 }
