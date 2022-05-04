@@ -43,6 +43,12 @@ export default new Router({
       name: 'addTeacher',
       meta: {layout: 'main'},
       component: () => import('./views/AddTeacher.vue')
+    },
+    {
+      path: '/createSubject',
+      name: 'createSubject',
+      meta: {layout: 'main'},
+      component: () => import('./views/CreateSubject.vue')
     }
   ]
 })

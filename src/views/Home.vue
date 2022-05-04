@@ -7,12 +7,23 @@
         <i class="material-icons">refresh</i>
       </button>
     </div>
-  
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large blue" href="#" @click="addSubject">
+        <i class="large material-icons">add</i>
+      </a>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'home'
+  name: 'home',
+
+  methods: {
+    addSubject() {
+      this.$router.push('/createSubject')
+    }
+  }
+
 }
 </script>
