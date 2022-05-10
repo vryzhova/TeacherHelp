@@ -14,18 +14,16 @@
     <small class="helper-text invalid"
     v-if="$v.title.$dirty && !$v.title.required"
     >Введите название каталога</small>
-    <form action="#">
     <div class="file-field input-field">
         <div class="btn">
         <span>File</span>
-        <input type="file" multiple
+        <input id="images" type="file" multiple
         >
         </div>
         <div class="file-path-wrapper">
         <input class="file-path validate" type="text" placeholder="Выберите фотографии для каталога">
         </div>
     </div>
-    </form>
         
     <button class="btn waves-effect waves-light blue darken-4" type="submit" name="action">Добавить каталог
     <i class="material-icons right">add</i>
@@ -53,7 +51,7 @@ export default {
             this.$v.$touch()
             return
         }
-        }
+        } 
     }
 }
 </script>

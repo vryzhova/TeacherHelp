@@ -7,7 +7,9 @@
             </a>
             <span class="white-text">{{date | date('date')}}</span>
         </div>
-
+        <div id="logo">
+            <img src="@/assets/logo.png">
+        </div>
         <ul class="right hide-on-small-and-down">
             <li>
             <a
@@ -69,3 +71,14 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+img {
+    width: 300px;
+    display: flex;
+
+}
+#logo {
+    object-fit: cover;
+}
+</style>

@@ -54,7 +54,7 @@ export default {
     data: () => ({
         name: '',
         email: '',
-        myselect: '',
+        myselect: [],
         select: null
     }),
     validations:  {
@@ -69,6 +69,12 @@ export default {
             this.$v.$touch()
             return
             }
+            const formData = {
+                name: this.name,
+                email: this.email,
+                myselect: this.myselect
+            }
+            console.log(formData)
         }
     },
     mounted() {
