@@ -12,3 +12,13 @@ export const FetchReq = async (url, token = null, method = "GET", ownHeader = nu
     return await fetch(_URL + url, requestOptions);
     };
 
+    export const sendLogin = async (username, password) => {
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username: username, password: password }),
+        };
+        return await fetch(_URL + "/Users/Authenticate", requestOptions).then((response) =>
+            response.json(),
+        );
+    };

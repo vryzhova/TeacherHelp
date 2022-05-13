@@ -4,19 +4,15 @@
       <span class="card-title">Система управления контрольными работами</span>
       <div class="input-field">
         <input
-            id="email"
+            id="login"
             type="text"
-            v-model.trim="email"
-            :class="{invalid: ($v.email.$dirty && !$v.email.required) || ($v.email.$dirty && !$v.email.email)}">
+            v-model.trim="login"
+            :class="{invalid: ($v.login.$dirty && !$v.login.required) }">
 
-        <label for="email">Email</label>
+        <label for="login">Логин</label>
         <small class="helper-text invalid"
-        v-if="$v.email.$dirty && !$v.email.required"
-        >Поле Email не должно быть пустым</small>
-
-        <small class="helper-text invalid"
-        v-else-if="$v.email.$dirty && !$v.email.email"
-        >Введите корректный Email</small>
+        v-if="$v.login.$dirty && !$v.login.required"
+        >Поле login не должно быть пустым</small>
       </div>
       <div class="input-field">
         <input
@@ -62,12 +58,12 @@ import messages from '@/utils/messages'
 export default {
   name: 'login',
   data: () => ({
-    email: '',
+    login: '',
     password: ''
   }),
   validations: {
-    email: {email, required},
-    password: {required, minLength: minLength(6)}
+    login: { required},
+    password: {required, minLength: minLength(3)}
   },
   mounted(){
     if(messages[this.$route.query.message]) {
@@ -81,12 +77,23 @@ export default {
         return
       }
       const formData = {
-        email: this.email,
+        username: this.login,
         password: this.password
       }
-      console.log(formData)
-      this.$router.push('/')
-      
+    fetch("http://194.58.107.109:5000/Users/Authenticate",{
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+        }).then((response) => {
+          if(response.ok) {
+            this.$router.push('/')
+            return response.json()
+            
+          }
+          }).then(user => {
+          console.log(user)
+          localStorage.setItem("token",user.token)
+          }).catch(error => console.log(error));  
     }
   }
 }

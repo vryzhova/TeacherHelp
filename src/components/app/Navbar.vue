@@ -18,7 +18,7 @@
                 data-target="dropdown"
                 ref="dropdown"
             >
-                USER NAME
+                {{name}}
                 <i class="material-icons right">arrow_drop_down</i>
             </a>
 
@@ -48,6 +48,7 @@ export default {
         date: new Date(),
         interval: null,
         dropdoun: null,
+        name: ''
     }),
     methods: {
         logout() {
@@ -62,6 +63,13 @@ export default {
         this.dropdown = M.Dropdown.init(this.$refs.dropdown,{
             constrainWidth: false
         })
+        const token = localStorage.getItem("token")
+        fetch("http://194.58.107.109:5000/Users/GetUser", {
+        method: "GET",
+        headers: { "Content-Type": "application/json",Authorization: token }
+    }).then(res => res.json()).then(user => {
+        this.name = user.firstName + ' ' + user.lastName
+    }).catch(error => console.log(error));
     },
     beforeDestroy() {
         clearInterval(this.interval)

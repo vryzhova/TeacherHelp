@@ -17,7 +17,7 @@ export default {
     props: ['value'],
     data: () => ({
         links: [
-            {title: 'Дисциплины', url: '/', exact: true},
+            {title: 'Контрольные работы', url: '/', exact: true},
             {title: 'Каталоги', url: '/catalogs'},
             {title: 'Преподаватели', url: '/admin/teachers'}
         ]
