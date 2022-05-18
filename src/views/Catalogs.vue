@@ -35,4 +35,7 @@ li {
 li:hover {
   color: blue;
 }
+.btn {
+  background-color: #EC1946;
+}
 </style>

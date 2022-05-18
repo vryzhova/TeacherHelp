@@ -2,10 +2,6 @@
   <div>
     <div class="page-title">
       <h3>Дисциплины</h3>
-
-      <button class="btn waves-effect waves-light btn-small">
-        <i class="material-icons">refresh</i>
-      </button>
     </div>
     <Subjects />
     <div class="fixed-action-btn">

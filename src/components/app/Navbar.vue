@@ -83,9 +83,11 @@ export default {
 <style scoped>
 img {
     width: 300px;
+    /* height: 60px; */
     display: flex;
 
 }
+
 #logo {
     object-fit: cover;
 }

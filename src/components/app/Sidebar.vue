@@ -19,7 +19,9 @@ export default {
         links: [
             {title: 'Контрольные работы', url: '/', exact: true},
             {title: 'Каталоги', url: '/catalogs'},
+            {title: 'Создание PDF', url: '/createPDF'},
             {title: 'Преподаватели', url: '/admin/teachers'}
+            
         ]
     })
 }

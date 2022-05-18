@@ -49,6 +49,12 @@ export default new Router({
       name: 'createSubject',
       meta: {layout: 'main'},
       component: () => import('./views/CreateSubject.vue')
+    },
+    {
+      path: '/createPDF',
+      name: 'createPDF',
+      meta: {layout: 'main'},
+      component: () => import('./views/PDF.vue')
     }
   ]
 })
