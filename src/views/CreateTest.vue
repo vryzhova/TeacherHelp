@@ -37,6 +37,10 @@
             <label>Название контрольной работы</label>
             <input id="taskName" type="text" v-model="taskName">
         </div>
+        <div class="input-field col s3">
+            <input type="number" id="timing">
+            <label for="timing">Время выполнения работы(мин)</label>
+        </div>
     </div>
     <button  type="submit" class="btn waves-effect waves-light blue darken-4 ">Добавить</button>
     </form>
@@ -53,7 +57,8 @@ export default {
     subject: '',
     chapter: '',
     theme: [] ,
-    taskName: ''
+    taskName: '',
+    time: ''
 }),
     methods: {
         createTask() {
