@@ -21,16 +21,14 @@
 
 
 <script>
+import {getSubjects} from "@/api/api"
 export default {
 data: () => ({
     subjects: []
 }),
-mounted() {
+async mounted() {
     const token = localStorage.getItem("token")
-        fetch("http://194.58.107.109:5000/Catalog/GetUserCatalog", {
-        method: "GET",
-        headers: { "Content-Type": "application/json",Authorization: token }
-    }).then(res => res.json()).then(data => {
+        await getSubjects(token).then(data => {
         for(let i = 0; i < data.length; i++){
             this.subjects.push(data[i].Name)
         }
@@ -56,3 +54,5 @@ mounted() {
     border-bottom: 1px solid rgba(255, 255, 255, 0,1);
 }
 </style>
+
+>

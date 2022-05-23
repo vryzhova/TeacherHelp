@@ -22,3 +22,7 @@ export const FetchReq = async (url, token = null, method = "GET", ownHeader = nu
             response.json(),
         );
     };
+
+    export const getSubjects = async (token) => {
+        return FetchReq("/Catalog/GetUserCatalog", token).then((res) => res.json());
+    };
