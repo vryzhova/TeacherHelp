@@ -5,7 +5,14 @@
     v-for="subject in subjects"
     :key="subject"> 
     <div class="collapsible-header"><h6>{{subject}}</h6></div>
-    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    <div class="collapsible-body">
+        <span>Разделы</span>
+        <ul>
+            <li>Теория множеств</li>
+            <li>Теория графов</li>
+            <li>Теория сетей</li>
+        </ul>
+    </div>
     </li>
     </ul>
     

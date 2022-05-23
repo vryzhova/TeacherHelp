@@ -42,10 +42,10 @@
         </button>
       </div>
 
-      <p class="center">
+      <!-- <p class="center">
         Нет аккаунта?
         <router-link to="/register">Зарегистрироваться</router-link>
-      </p>
+      </p> -->
     </div>
   </form>
 </template>
@@ -86,14 +86,15 @@ export default {
         body: JSON.stringify(formData),
         }).then((response) => {
           if(response.ok) {
-            this.$router.push('/')
+            this.$router.push('/home')
             return response.json()
             
           }
           }).then(user => {
-          console.log(user)
           localStorage.setItem("token",user.token)
-          }).catch(error => console.log(error));  
+          }).catch(error => {
+            console.log(error)
+          });  
     }
   }
 }

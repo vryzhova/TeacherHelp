@@ -8,7 +8,7 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/login',
+      path: '/',
       name: 'login',
       meta: {layout: 'empty'},
       component: () => import('./views/Login.vue')
@@ -20,7 +20,7 @@ export default new Router({
       component: () => import('./views/Register.vue')
     },
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       meta: {layout: 'main'},
       component: () => import('./views/Home.vue')
@@ -55,6 +55,13 @@ export default new Router({
       name: 'createPDF',
       meta: {layout: 'main'},
       component: () => import('./views/PDF.vue')
+    },
+    ,
+    {
+      path: '/createTest',
+      name: 'createTest',
+      meta: {layout: 'main'},
+      component: () => import('./views/CreateTest.vue')
     }
   ]
 })

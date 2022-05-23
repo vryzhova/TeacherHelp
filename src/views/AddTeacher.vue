@@ -4,7 +4,8 @@
         <h3>Преподаватели</h3>
     </div>
     <form @submit.prevent="submitHandler">
-        <div class="input-field">
+    <div class="row"> 
+        <div class="input-field col s6">
             <label for="teacherName">ФИО преподавателя</label>
             <input id="teacherName" type="text"
             v-model.trim="name"
@@ -12,7 +13,7 @@
             >
             <small class="helper-text invalid" v-if="$v.name.$dirty && !$v.name.required">Введите имя преподавателя</small>
         </div>
-        <div class="input-field">
+        <div class="input-field col s6">
             <label for="teacherEmail">Email</label>
             <input id="teacherEmail" type="text"
             v-model.trim="email"
@@ -25,22 +26,49 @@
         v-else-if="$v.email.$dirty && !$v.email.email"
         >Введите корректный Email</small>
         </div>
-        <div class="input-field col s12 subject">
+        <div class="input-field col s6">
+            <label for="teacherLogin">Логин</label>
+            <input id="teacherLogin" type="text"
+            v-model.trim="login"
+            :class="{invalid: $v.login.$dirty && !$v.login.required}"
+            >
+            <small class="helper-text invalid" 
+            v-if="$v.login.$dirty && !$v.login.required">
+            Поле Логин не должно быть пустым
+        </small>
+        </div>
+        <div class="input-field col s6">
+            <label for="teacherPassword">Пароль</label>
+            <input id="teacherPassword" type="password"
+            v-model="password"
+            :class="{invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength)}">
+            <small class="helper-text invalid" 
+            v-if="$v.password.$dirty && !$v.password.required"
+            >
+            Введите пароль
+            </small>
+            <small class="helper-text invalid" 
+            v-if="$v.password.$dirty && !$v.password.minLength"
+            >
+            Пароль должен быть не меньше {{$v.password.$params.minLength.min}} символов.Сейчас он {{password.length}}
+            </small>
+        </div>
+        <div class="input-field col 6 subject">
             <select ref="select" multiple
             v-model="myselect"
             :class="{invalid: ($v.myselect.$dirty && !$v.myselect.required)}"
             >
                 <option value="" disabled >Выберите предмет</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+                <option value="дискретка">Дискретная математика</option>
+                <option value="2">Физика</option>
+                <option value="3">Математика</option>
             </select>
             <small class="helper-text invalid"
             v-if="$v.myselect.$dirty && !$v.myselect.required"
             >Вы не выбрали ни одного предмета</small>
-        </div>
+        </div></div>
 
-            <button  type="submit" class="btn waves-effect waves-light blue darken-4">Добавить преподавателя</button>
+            <button  type="submit" class="btn waves-effect waves-light blue darken-4 ">Добавить преподавателя</button>
     </form>
     
 </div>
@@ -49,18 +77,22 @@
 
 
 <script>
-import { required, email } from "vuelidate/lib/validators";
+import { required, email, minLength } from "vuelidate/lib/validators";
 export default {
     data: () => ({
         name: '',
         email: '',
         myselect: [],
-        select: null
+        select: null,
+        login: '',
+        password: ''
     }),
     validations:  {
         name: {required},
         email: {required,email},
-        myselect: {required}
+        myselect: {required},
+        login: {required},
+        password: {required, minLength: minLength(3)}
         
     },
     methods: {
@@ -72,7 +104,9 @@ export default {
             const formData = {
                 name: this.name,
                 email: this.email,
-                myselect: this.myselect
+                myselect: this.myselect,
+                login: this.login,
+                password: this.password
             }
             console.log(formData)
         }
