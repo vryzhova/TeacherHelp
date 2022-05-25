@@ -4,7 +4,8 @@
         <h3>Создать каталог</h3>
     </div>
     <form @submit.prevent="submitHandler">
-    <label for="subjectName">Имя каталога</label>
+    <div class="input-field">
+        <label for="subjectName">Имя каталога</label>
     <input
     id="subjectName"
     type="text"
@@ -14,10 +15,12 @@
     <small class="helper-text invalid"
     v-if="$v.title.$dirty && !$v.title.required"
     >Введите название каталога</small>
+    </div>
+    
     <div class="file-field input-field">
         <div class="btn">
         <span>File</span>
-        <input id="images" type="file" multiple
+        <input id="images" type="file" @change="handleFilesUpload()" ref="files" multiple
         >
         </div>
         <div class="file-path-wrapper">
@@ -40,17 +43,26 @@ import { required } from "vuelidate/lib/validators";
 export default {
     name: 'createCatalog',
     data: () => ({
-        title: ''
+        title: '',
+        files: ''
     }),
     validations:  {
         title: {required}
     },
     methods: {
+        handleFilesUpload() {
+        this.files = this.$refs.files.files 
+    },
         submitHandler() {
             if (this.$v.$invalid) {
             this.$v.$touch()
             return
         }
+        const formData = {
+            title: this.title,
+            images: this.images
+        }
+        console.log(formData)
         } 
     }
 }

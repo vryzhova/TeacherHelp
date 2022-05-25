@@ -18,17 +18,20 @@
         <div class="col s3">
             <label for="razdelName">Раздел</label>
             <select  ref="select" name="razdelName" id="razdelName"  v-model="chapter">
-                <option value="Теория множеств">Теория множеств</option>
-                <option value="Теория множеств">Теория множеств</option>
-                <option value="Теория сетей">Теория сетей</option>
+                <option v-for="(chapter, idx) in chapters" :key="idx" :value="idx"
+                >
+                {{chapter.text}}
+                </option>
             </select>
         </div> 
         <div class="col s3">
             <label for="ThemeName">Темы</label>
             <select  ref="selectTheme" name="ThemeName" id="ThemeName" multiple v-model="theme">
-                <option value="Сети Петри">Сети Петри</option>
-                <option value="Транспортные сети">Транспортные сети</option>
-                <option value="Нейронные сети">Нейронные сети</option>
+                <option
+                v-for="(themese, idx) in themeses" :key="idx" :value="idx"
+                >
+                {{themese.name}}
+                </option>
             </select>
         </div>
     </div>
@@ -42,6 +45,77 @@
             <label for="timing">Время выполнения работы(мин)</label>
         </div>
     </div>
+    <div class="row">
+        <div class="col12">
+            <h5>Добавление теоретических вопросов</h5>
+        </div>
+        <div class="input-field col s3">
+            <input type="number" id="teor_size">
+            <label for="teor_size">Кол-во теоретических вопросов</label>
+        </div>
+        <div class="input-field col s1">
+            <input type="text" id="prac_grade">
+            <label for="prac_grade">баллы</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="file-field input-field col s4">
+            <div class="btn">
+        <span>File</span>
+        <input id="images" type="file" multiple
+        >
+        </div>
+        <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="Иллюстрации к вопросам">
+        </div>
+        </div>
+        <div class="file-field input-field col s4">
+            <div class="btn">
+        <span>File</span>
+        <input id="images" type="file" multiple
+        >
+        </div>
+        <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="Помощь преподавателю">
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col12">
+            <h5>Добавление практических задач</h5>
+        </div>
+        <div class="input-field col s3">
+            <input type="number" id="prac_size">
+            <label for="prac_size">Кол-во практических задач</label>
+        </div>
+        <div class="input-field col s1">
+            <input type="text" id="prac_grade">
+            <label for="prac_grade">баллы</label>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="file-field input-field col s4">
+            <div class="btn">
+        <span>File</span>
+        <input id="images" type="file" multiple
+        >
+        </div>
+        <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="Иллюстрации к вопросам">
+        </div>
+        </div>
+        <div class="file-field input-field col s4">
+            <div class="btn">
+        <span>File</span>
+        <input id="images" type="file" multiple
+        >
+        </div>
+        <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="Помощь преподавателю">
+        </div>
+        </div>
+    </div>
     <button  type="submit" class="btn waves-effect waves-light blue darken-4 ">Добавить</button>
     </form>
     
@@ -51,11 +125,15 @@
 
 <script>
 import {getSubjects} from "@/api/api"
+import {getCapters} from "@/api/api"
+import {getTheme} from "@/api/api"
 export default {
     data: () => ({
     tasks: [],
     subject: '',
-    chapter: '',
+    chapters: [],
+    chapter:'',
+    themeses: '',
     theme: [] ,
     taskName: '',
     time: ''
@@ -68,18 +146,27 @@ export default {
                 chapter: this.chapter,
                 theme: this.theme
             }
-            console.log(formData)
+            
         }
     },
     async mounted() {
         const token = localStorage.getItem("token")
         await getSubjects(token).then(data => {
         for(let i = 0; i < data.length; i++){
-            this.tasks.push({'value': data[i].Name, 'text': data[i].Name})
+            this.tasks.push({'value': data[i].name, 'text': data[i].name})
         }
     }).catch(error => console.log(error));
-    
-    console.log(this.tasks)
+    await getCapters(token).then(data =>{
+            for(let i = 0; i < data.length; i++) {
+                this.chapters.push({'id': data[i].id,'value': data[i].name, 'text': data[i].name})
+            }
+            
+        }).catch(error => console.log(error));
+
+        await getTheme(token).then(themes => {
+            this.themeses = themes
+            console.log( this.themeses)
+        })
         this.select = M.FormSelect.init(this.$refs.select)
         this.selectSubject = M.FormSelect.init(this.$refs.selectSubject)
         this.selectTheme = M.FormSelect.init(this.$refs.selectTheme)
@@ -103,3 +190,6 @@ export default {
             this.tasks.push({'value': data[i].Name, 'text': data[i].Name})
         }
     }).catch(error => console.log(error)); -->
+
+
+    

@@ -1,4 +1,4 @@
-const _URL = "http://194.58.107.109:5000";
+const _URL = "http://127.0.0.1:8000";
 
 export const FetchReq = async (url, token = null, method = "GET", ownHeader = null) => {
     let requestOptions = undefined;
@@ -6,7 +6,7 @@ export const FetchReq = async (url, token = null, method = "GET", ownHeader = nu
     else {
         requestOptions = {
         method: method,
-        headers: { "Content-Type": "application/json", Authorization: token },
+        headers: { "Content-Type": "application/json","Accept" : "application/json", Authorization: token ,"X-CSRFToken": "rR1HL56Zs1x6JdAZihsJ8OqLMkP5Bg6scmSbnhFXR0XNJbz9eBmnk23Z9d6rhwI5"},
         };
     }
     return await fetch(_URL + url, requestOptions);
@@ -24,5 +24,13 @@ export const FetchReq = async (url, token = null, method = "GET", ownHeader = nu
     };
 
     export const getSubjects = async (token) => {
-        return FetchReq("/Catalog/GetUserCatalog", token).then((res) => res.json());
+        return FetchReq("/subjects/", token).then((res) => res.json());
+    };
+
+    export const getCapters = async (token) => {
+        return FetchReq("/chapters/", token).then((res) => res.json());
+    };
+
+    export const getTheme = async (token) => {
+        return FetchReq("/themes/", token).then((res) => res.json());
     };

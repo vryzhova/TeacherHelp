@@ -80,7 +80,26 @@ export default {
         username: this.login,
         password: this.password
       }
-    fetch("http://194.58.107.109:5000/Users/Authenticate",{
+      fetch("http://127.0.0.1:8000/login/",{
+        method: "POST",
+        headers: {"Accept" : "application/json" ,  "Content-Type": "application/json" ,"X-CSRFToken": "rR1HL56Zs1x6JdAZihsJ8OqLMkP5Bg6scmSbnhFXR0XNJbz9eBmnk23Z9d6rhwI5" },
+        body: JSON.stringify(formData),
+        }).then((response) => {
+          if(response.ok) {
+            this.$router.push('/home')
+            return response.json()
+            
+          }}).then(user => {
+          localStorage.setItem("token",user.access)
+          }).catch(error => {
+            console.log(error)
+          });
+
+    }
+  }
+}
+</script>
+<!-- fetch("http://194.58.107.109:5000/Users/Authenticate",{
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -94,8 +113,20 @@ export default {
           localStorage.setItem("token",user.token)
           }).catch(error => {
             console.log(error)
-          });  
-    }
-  }
-}
-</script>
+          });  -->
+
+<!-- 
+        fetch("http://127.0.0.1:8000/login/",{
+        method: "POST",
+        headers: {"Accept" : "application/json" ,  "Content-Type": "application/json" ,"X-CSRFToken": "h77aqqoLb4rxDqrbmImAyufDDzIiARLk2CYE2CXJA3ReDoqli2geKISR0sZEg7nX" },
+        body: JSON.stringify(formData),
+        }).then((response) => {
+          if(response.ok) {
+            this.$router.push('/home')
+            return response.json()
+            
+          }}).then(user => {
+          localStorage.setItem("token",user.access)
+          }).catch(error => {
+            console.log(error)
+          });   -->
