@@ -1,4 +1,4 @@
-# diplom
+## This app is a part of big project for ITMO University. This application can help teachers creating new test and uploading stydy materials and savw them in database.
 
 ## Project setup
 ```
